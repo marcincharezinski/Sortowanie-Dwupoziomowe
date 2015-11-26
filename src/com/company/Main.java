@@ -37,7 +37,7 @@ public class Main {
 
         Arrays.sort(multiArray, new Comparator<int[]>() {
             public int compare(int[] firstRow, int[] secondRow) {
-                return firstRow.length - secondRow.length;
+                return secondRow.length - firstRow.length;
             }
         });
 
