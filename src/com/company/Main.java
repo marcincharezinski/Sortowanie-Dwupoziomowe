@@ -1,32 +1,51 @@
 package com.company;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Random;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        final int MAX_ARRAYS = 10;
-        final int MIN_ARRAYS = 5;
+        final int MAX_ROWS = 10;
+        final int MIN_ROWS = 5;
         final int MAX_SIZE = 20;
         final int MIN_SIZE = 10;
 
-        int numberOfArrays = new Random().ints(MIN_ARRAYS, MAX_ARRAYS).findFirst().getAsInt();
-        System.out.println("numbersOfArrays: " + numberOfArrays);
+        int rows = new Random().ints(MIN_ROWS, MAX_ROWS).findFirst().getAsInt();
+        int[][] multiArray = new int[rows][];
 
-        for (int j = 0; j < numberOfArrays; j++) {
-
+        for (int j = 0; j < rows; j++) {
             int size = new Random().ints(MIN_SIZE, MAX_SIZE).findFirst().getAsInt();
-            int[] array = new Random().ints(size).toArray();
+            multiArray[j] = new int[size];
 
-            System.out.println(Arrays.toString(array));
-
+            multiArray[j] = new Random().ints(size).toArray();
         }
 
-        int[][] Array = new int[numberOfArrays][];
-        System.out.println(Arrays.toString(Array));
+        System.out.println("Multi array before: ");
+        System.out.println(Arrays.deepToString(multiArray).replace("], ", "]\n"));
+        System.out.println();
+
+        for (int[] row : multiArray) {
+            Arrays.sort(row); // Metoda sort() pochodzi z java.util, ew można tutaj zaimplikować swoją
+        }
+
+        System.out.println("Multi array after first step: ");
+        System.out.println(Arrays.deepToString(multiArray).replace("], ", "]\n"));
+        System.out.println();
+
+        Arrays.sort(multiArray, new Comparator<int[]>() {
+            public int compare(int[] firstRow, int[] secondRow) {
+                return firstRow.length - secondRow.length;
+            }
+        });
+
+        System.out.println("Multi array after second step: ");
+        System.out.println(Arrays.deepToString(multiArray).replace("], ", "]\n"));
+        System.out.println();
     }
+
 
 }
 
