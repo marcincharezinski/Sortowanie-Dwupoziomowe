@@ -1,7 +1,6 @@
 package com.company;
 
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.Random;
 
 public class Main {
@@ -23,27 +22,17 @@ public class Main {
             multiArray[j] = new Random().ints(size).toArray();
         }
 
-        System.out.println("Multi array before: ");
-        System.out.println(Arrays.deepToString(multiArray).replace("], ", "]\n"));
-        System.out.println();
+        System.out.println("Multi array before: " + "\n\n" +
+                Arrays.deepToString(multiArray).replace("], ", "]\n") + "\n");
 
         for (int[] row : multiArray) {
-            Arrays.sort(row); // Metoda sort() pochodzi z java.util, ew można tutaj zaimplikować swoją
+            Arrays.sort(row); // Metoda sort() pochodzi z java.util, która dla małych wartości implikuje algorytm quick sort
         }
 
-        System.out.println("Multi array after first step: ");
-        System.out.println(Arrays.deepToString(multiArray).replace("], ", "]\n"));
-        System.out.println();
+        Arrays.sort(multiArray, (int[] firstRow, int[] secondRow) -> (secondRow.length) - (firstRow.length));
 
-        Arrays.sort(multiArray, new Comparator<int[]>() {
-            public int compare(int[] firstRow, int[] secondRow) {
-                return secondRow.length - firstRow.length;
-            }
-        });
-
-        System.out.println("Multi array after second step: ");
-        System.out.println(Arrays.deepToString(multiArray).replace("], ", "]\n"));
-        System.out.println();
+        System.out.println("Multi array after two steps sort: " + "\n\n" +
+                Arrays.deepToString(multiArray).replace("], ", "]\n"));
     }
 
 
